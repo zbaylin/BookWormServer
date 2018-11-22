@@ -12,6 +12,11 @@ require "crecto" # Crecto -- see crecto.com
 
 # Imports all the files we have written, such as:
 require "./models/main.cr" # The main models file
+require "./routes/main.cr" # The main routes file
+
 module BookWormServer
   VERSION = "1.0.0"
+
+  # Run the Kemal server
+  Kemal.run
 end
