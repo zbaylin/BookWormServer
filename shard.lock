@@ -28,3 +28,7 @@ shards:
     github: luislavena/radix
     version: 0.3.8
 
+  sqlite3:
+    github: crystal-lang/crystal-sqlite3
+    version: 0.10.0
+

@@ -9,6 +9,8 @@ dependencies:
     github: kemalcr/kemal
   kemal-session:
     github: kemalcr/kemal-session
+  sqlite3:
+    github: crystal-lang/crystal-sqlite3
   crecto:
     github: fridgerator/crecto
 
