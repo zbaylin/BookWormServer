@@ -2,6 +2,9 @@
 # A model is a class representation of a real world
 # object, like a book, person, checkout, etc.
 
+# We import all the models in the project, such as:
+require "./book.cr" # A book
+
 module BookWormServer
   # We give the query and multi Crecto modules
   # shortcuts so we don't have to write them
