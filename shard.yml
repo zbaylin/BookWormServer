@@ -1,0 +1,21 @@
+name: BookWormServer
+version: 0.1.0
+
+authors:
+  - Zach Baylin <zbaylin@gmail.com>
+
+dependencies:
+  kemal:
+    github: kemalcr/kemal
+  kemal-session:
+    github: kemalcr/kemal-session
+  crecto:
+    github: fridgerator/crecto
+
+targets:
+  BookWormServer:
+    main: src/BookWormServer.cr
+
+crystal: 0.27.0
+
+license: MIT
