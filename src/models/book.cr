@@ -12,6 +12,7 @@ module BookWormServer
       field :publisher, String # Publisher
       field :summary, String # Summary
       field :publication_date, Time # Publication Date
+      field :rating, Float64 # Rating
     end
   end
 end

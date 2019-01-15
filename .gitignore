@@ -2,5 +2,8 @@
 /lib/
 /bin/
 /.shards/
+/data/ebooks/*
+/data/thumbs/*
+/data/library.db
 *.dwarf
 .vscode/*

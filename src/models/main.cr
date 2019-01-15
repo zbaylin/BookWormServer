@@ -4,6 +4,8 @@
 
 # We import all the models in the project, such as:
 require "./book.cr" # A book
+require "./student.cr" # A student
+require "./issuance.cr" # An issuance
 
 module BookWormServer
   # We give the query and multi Crecto modules
