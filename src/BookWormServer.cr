@@ -15,6 +15,9 @@ require "crypto/bcrypt/password" # bcrypt -- from the stdlib, used for password 
 require "./models/main.cr" # The main models file
 require "./routes/main.cr" # The main routes file
 
+# Imports all the utilities, such as:
+require "./utils/routing.cr" # The tools helping with routing
+
 module BookWormServer
   VERSION = "1.0.0"
 

@@ -6,6 +6,7 @@
 # We import all the other API routes, such as:
 require "./books.cr" # The books API
 require "./students.cr" # The students API
+require "./issuances.cr" # The issuances API -- allows users to check out eBooks
 
 module BookWormServer
 

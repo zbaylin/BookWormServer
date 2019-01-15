@@ -15,15 +15,15 @@ module BookWormServer
 
       unique_constraint :email # The email is unique, so 1 account per student.
     end
-  end
 
-  # Create a method to authenticate if a student's credentials are valid
-  def self.authenticate(email : String, password : String)
-    student = Repo.get_by(User, email: email)
-    if (student == nil)
-      return false
+    # Create a method to authenticate if a student's credentials are valid
+    def self.authenticate(email : String, password : String)
+      student = Repo.get_by(Student, email: email)
+      if (student == nil)
+        return false
+      end
+      student = student.as(Student)
+      return Crypto::Bcrypt::Password.new(student.password.as(String)) == password
     end
-    student = student.as(Student)
-    return Crypto::Bcrypt::Password.new(student.password) == password
   end
 end
