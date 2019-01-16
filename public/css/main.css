@@ -1,0 +1,46 @@
+/* Allows centering in the middle of the page */
+.parent-both-center {
+  position: relative;
+}
+
+.child-both-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Allows full height/width expansion */
+.is-full-height {
+  height: 100%;
+}
+
+.is-full-width {
+  width: 100%;
+}
+
+.has-text-centered {
+  text-align: center;
+}
+
+.btn-row:hover {
+  background-color: rgb(242, 241, 241);
+}
+
+.menu-card {
+  width: 24em;
+  min-height: 30em;
+}
+
+.card-shadow-animated {
+  animation: raise-shadow 2s ease forwards;
+}
+
+@keyframes raise-shadow {
+  from {
+    box-shadow: none;
+  } to {
+    box-shadow: 0 20px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+  }
+}
+

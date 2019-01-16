@@ -5,9 +5,7 @@
 
 # We import all other relevant routes, such as:
 require "./api/main.cr" # The main API routes file
+require "./frontend/main.cr" # The main frontend routes file
 
 module BookWormServer
-  get "/" do |env|
-    "Welcome to BookWorm. This page isn't quite ready yet."
-  end
 end

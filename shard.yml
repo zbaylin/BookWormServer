@@ -13,6 +13,8 @@ dependencies:
     github: crystal-lang/crystal-sqlite3
   crecto:
     github: fridgerator/crecto
+  slang:
+    github: jeromegn/slang
 
 targets:
   BookWormServer:

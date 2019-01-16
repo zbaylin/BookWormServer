@@ -10,6 +10,7 @@ require "kemal-session" # kemal-session -- see github.com/kemalcr/kemal-session
 require "sqlite3" # SQLite3 -- part of Crystal's standard library
 require "crecto" # Crecto -- see crecto.com
 require "crypto/bcrypt/password" # bcrypt -- from the stdlib, used for password encryption
+require "kilt/slang" # Slang -- see github.com/jeromegn/slang
 
 # Imports all the files we have written, such as:
 require "./models/main.cr" # The main models file
