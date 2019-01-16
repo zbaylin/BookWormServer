@@ -27,4 +27,30 @@ module BookWormServer
       halt env, status_code: 500, response: response
     end
   end
+
+  post "/api/issuance/redeem" do |env|
+    begin
+      required_params = ["email", "password", "redemption_key"]
+      require_json_params(required_params, env)
+
+      if !Student.authenticate(
+        env.params.json["email"].as(String),
+        env.params.json["password"].as(String)
+      )
+        response = {"success": false, "message": "Incorrect user credentials."}.to_json
+        halt env, status_code: 403, response: response
+      end
+
+      issuance_query = Query.where(redemption_key: env.params.json["redemption_key"].as(String))
+                            .preload(:book)
+      issuance = Repo.all(Issuance, issuance_query)[0].as(Issuance)
+
+      isbn = issuance.book.isbn
+      
+      send_file env, "data/ebooks/#{isbn.as(String)}.pdf", "application/pdf"   
+    rescue exception
+      response = {"success": false, "message": "Unable to redeem issuance: #{exception}"}.to_json
+      halt env, status_code: 500, response: response
+    end
+  end
 end
