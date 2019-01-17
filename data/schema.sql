@@ -21,6 +21,8 @@ CREATE TABLE "issuances" (
   "id" INTEGER NOT NULL PRIMARY KEY,
   "book_id" INTEGER NOT NULL,
   "student_id" INTEGER NOT NULL,
+  "redeemed" INTEGER NOT NULL,
+  "url" TEXT,
   "created_at" TEXT NOT NULL,
   "updated_at" TEXT NOT NULL,
   "redemption_key" TEXT NOT NULL,

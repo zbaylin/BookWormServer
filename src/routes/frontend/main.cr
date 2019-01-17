@@ -1,3 +1,4 @@
+require "./issuances.cr"
 
 module BookWormServer
   get "/" do |env|

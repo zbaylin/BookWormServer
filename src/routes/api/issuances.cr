@@ -32,7 +32,7 @@ module BookWormServer
     begin
       required_params = ["email", "password", "redemption_key"]
       require_json_params(required_params, env)
-
+      
       if !Student.authenticate(
         env.params.json["email"].as(String),
         env.params.json["password"].as(String)
@@ -45,9 +45,19 @@ module BookWormServer
                             .preload(:book)
       issuance = Repo.all(Issuance, issuance_query)[0].as(Issuance)
 
+      if issuance.redeemed
+        response = {"success": false, "message": "This issuance has already been redeemed."}.to_json
+        halt env, status_code: 410, response: response
+      end
+
+      issuance.redeemed = true
+      issuance.url = Random.new.urlsafe_base64
+
+      Repo.update(issuance)
+
       isbn = issuance.book.isbn
       
-      send_file env, "data/ebooks/#{isbn.as(String)}.pdf", "application/pdf"   
+      {"success": true, "url": issuance.url}.to_json
     rescue exception
       response = {"success": false, "message": "Unable to redeem issuance: #{exception}"}.to_json
       halt env, status_code: 500, response: response

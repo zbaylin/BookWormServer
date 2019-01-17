@@ -24,7 +24,7 @@ let make = (children) => {
     | ChooseChoice(choice) => ReasonReact.SideEffects((self) => {
         self.send(UpdateChoice(choice));
         switch choice {
-          | Redeem => window -> Window.setLocation("/redeem");
+          | Redeem => window -> Window.setLocation("/issuance/redeem");
         }
       })
     | UpdateChoice(choice) => ReasonReact.Update({...state, chosenChoice: Some(choice)})
