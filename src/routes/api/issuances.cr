@@ -63,4 +63,15 @@ module BookWormServer
       halt env, status_code: 500, response: response
     end
   end
+
+  get "/api/issuances/weekly_stats" do |env|
+    time_1 = Time.parse(env.params.query["date"].as(String), "%F", Time::Location::UTC)
+    time_0 = time_1 - 7.days
+
+    query = Query.where("date(created_at) BETWEEN ? AND ?", [time_0.to_s("%F"), time_1.to_s("%F")])
+    issuances = Repo.all(Issuance, query)
+    redeemed = issuances.count { |issuance| issuance.redeemed == true }
+
+    {"success": true, "num_issuances": issuances.size, "num_redeemed": redeemed}.to_json
+  end
 end

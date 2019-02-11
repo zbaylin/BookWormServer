@@ -11,7 +11,8 @@ module BookWormServer
       field :email, String # Email
       field :password, String # Password
 
-      has_many :issuances, Issuance # and many Issuances.
+      has_many :issuances, Issuance # many Issuances
+      has_many :books, Book, through: :issuances
 
       unique_constraint :email # The email is unique, so 1 account per student.
     end
@@ -25,5 +26,29 @@ module BookWormServer
       student = student.as(Student)
       return Crypto::Bcrypt::Password.new(student.password.as(String)) == password
     end
+  
+    def to_safe
+      {
+        "firstname": self.firstname,
+        "lastname": self.lastname,
+        "email": self.email,
+        "id": self.id
+      }
+    end
+
+    def self.backup
+      students = Repo.all(Student)
+      CSV.build do |csv|
+        csv.row ["First name", "Last name", "Email"]
+        students.each do |student|
+          csv.row [
+            student.firstname,
+            student.lastname,
+            student.email
+          ]
+        end
+      end
+    end
+    
   end
 end

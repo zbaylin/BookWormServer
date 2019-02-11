@@ -16,5 +16,17 @@ module BookWormServer
   before_all "/api/*" do |env|
     env.response.content_type = "application/json"
   end
-  
+
+  get "/api/backup.zip" do |env|
+    env.response.content_type = "application/zip"
+    path = ""
+    File.tempfile("backup", ".zip") do |file|
+      path = file.path
+      Zip::Writer.open(file) do |zip|
+        zip.add "books.csv", Book.backup
+        zip.add "students.csv", Student.backup
+      end
+    end
+    send_file env, path
+  end
 end

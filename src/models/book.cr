@@ -14,5 +14,24 @@ module BookWormServer
       field :publication_date, Time # Publication Date
       field :rating, Float64 # Rating
     end
+
+    def self.backup
+      books = Repo.all(Book)
+      CSV.build do |csv|
+        csv.row ["ISBN", "Title", "Author", "Publisher", "Summary", "Publication Date", "Rating"]
+        books.each do |book|
+          csv.row [
+            book.isbn,
+            book.title,
+            book.author,
+            book.publisher,
+            book.summary,
+            book.publication_date,
+            book.rating
+          ]
+        end
+      end
+    end
+
   end
 end
