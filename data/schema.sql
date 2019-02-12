@@ -14,6 +14,7 @@ CREATE table "students" (
   "firstname" TEXT NOT NULL,
   "lastname" TEXT NOT NULL,
   "email" TEXT UNIQUE NOT NULL,
+  "grade" TEXT NOT NULL,
   "password" TEXT NOT NULL
 );
 

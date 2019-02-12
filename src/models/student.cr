@@ -10,6 +10,7 @@ module BookWormServer
       field :lastname, String # Last name
       field :email, String # Email
       field :password, String # Password
+      field :grade, String # Grade
 
       has_many :issuances, Issuance # many Issuances
       has_many :books, Book, through: :issuances
@@ -26,25 +27,17 @@ module BookWormServer
       student = student.as(Student)
       return Crypto::Bcrypt::Password.new(student.password.as(String)) == password
     end
-  
-    def to_safe
-      {
-        "firstname": self.firstname,
-        "lastname": self.lastname,
-        "email": self.email,
-        "id": self.id
-      }
-    end
 
     def self.backup
       students = Repo.all(Student)
       CSV.build do |csv|
-        csv.row ["First name", "Last name", "Email"]
+        csv.row ["First name", "Last name", "Email", "Grade"]
         students.each do |student|
           csv.row [
             student.firstname,
             student.lastname,
-            student.email
+            student.email,
+            student.grade
           ]
         end
       end

@@ -13,6 +13,7 @@ module BookWormServer
       student.password = Crypto::Bcrypt::Password.create(env.params.json["password"].as(String)).to_s # Password
       student.firstname = env.params.json["firstname"].as(String) # Firstname
       student.lastname = env.params.json["lastname"].as(String) # Lastname
+      student.grade = env.params.json["grade"].as(String) # Grade
       # Insert the student
       cs = Repo.insert(student)
       # If the insertion is invalid, raise a DB Error
@@ -52,6 +53,7 @@ module BookWormServer
       student.firstname = env.params.json["firstname"].as(String)
       student.lastname = env.params.json["lastname"].as(String)
       student.email = env.params.json["email"].as(String)
+      student.grade = env.params.json["grade"].as(String)
       changeset = Repo.update(student)
       if !changeset.valid?
         raise "DB Error"

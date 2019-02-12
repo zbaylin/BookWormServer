@@ -64,6 +64,18 @@ module BookWormServer
     end
   end
 
+  get "/api/issuances" do |env|
+    begin
+      issuance_query = Query.preload(:student)
+                            .preload(:book)
+      issuances = Repo.all(Issuance, issuance_query)
+      {"success": true, "issuances": issuances}.to_json
+    rescue exception
+      response = {"success": false, "message": "Unable to fetch issuances: #{exception}"}.to_json
+      halt env, status_code: 500, response: response
+    end
+  end
+
   get "/api/issuances/weekly_stats" do |env|
     time_1 = Time.parse(env.params.query["date"].as(String), "%F", Time::Location::UTC)
     time_0 = time_1 - 7.days
