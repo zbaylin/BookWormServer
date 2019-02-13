@@ -13,6 +13,7 @@ require "crypto/bcrypt/password" # bcrypt -- from the stdlib, used for password 
 require "kilt/slang" # Slang -- see github.com/jeromegn/slang
 require "csv" # CSV -- see https://crystal-lang.org/api/0.24.1/CSV/Builder.html
 require "zip"
+require "logger"
 
 # Imports all the files we have written, such as:
 require "./models/main.cr" # The main models file
@@ -23,6 +24,10 @@ require "./utils/routing.cr" # The tools helping with routing
 
 module BookWormServer
   VERSION = "1.0.0"
+
+  L = Logger.new( 
+    File.new("log.txt", mode="w+")
+  )
 
   # Run the Kemal server
   Kemal.run

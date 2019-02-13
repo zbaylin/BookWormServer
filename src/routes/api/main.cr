@@ -17,6 +17,12 @@ module BookWormServer
     env.response.content_type = "application/json"
   end
 
+  post "/api/register" do |env|
+    entry = "\n  New open:
+    Client IP: #{env.request.headers["X-Forwarded-For"]?}"
+    L.info entry
+  end
+
   get "/api/backup.zip" do |env|
     env.response.content_type = "application/zip"
     path = ""

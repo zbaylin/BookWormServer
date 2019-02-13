@@ -2,7 +2,8 @@ open Webapi.Dom;
 
 /* A predefined list of menu options */
 type choice =
-  | Redeem;
+  | Redeem
+  | Download;
 
 
 type action =
@@ -25,6 +26,7 @@ let make = (children) => {
         self.send(UpdateChoice(choice));
         switch choice {
           | Redeem => window -> Window.setLocation("/issuance/redeem");
+          | Download => window -> Window.setLocation("/download");
         }
       })
     | UpdateChoice(choice) => ReasonReact.Update({...state, chosenChoice: Some(choice)})
@@ -46,7 +48,11 @@ let make = (children) => {
           onClick=((_) => self.send(ChooseChoice(Redeem)))
           >
           (ReasonReact.string("Redeem Book"))</button>
-        <button className="btn btn-row btn-link menu-button btn-block">(ReasonReact.string("User Info"))</button>
+        <button
+          className="btn btn-row btn-link menu-button btn-block"
+          onClick=((_) => self.send(ChooseChoice(Download)))
+          >
+          (ReasonReact.string("Download"))</button>
       </div>
     </div>
   }
